@@ -1,0 +1,74 @@
+<?php
+
+namespace App\Repositories;
+
+use App\DTO\Adverts\CreateAdvertDTO;
+use App\DTO\Adverts\UpdateAdvertDTO;
+use App\Models\Advert;
+use App\Repositories\AdvertRepositoryInterface;
+use stdClass;
+
+class AdvertEloquentORM implements AdvertRepositoryInterface
+{
+    public function __construct(
+        protected Advert $model
+    ) {}
+
+    public function paginate(int $page = 1, int $totalPerPage = 10, string $filter = null): PaginationInterface
+    {
+        $result = $this->model
+                    ->where(function($query) use ($filter) {
+                        if ($filter) {
+                            $query->where('subject', $filter);
+                            $query->orWhere('body', 'like', "%$filter%");
+                        }
+                    })
+                    ->paginate($totalPerPage, ['*'], 'page', $page);
+
+        return new PaginationPresenter($result);
+    }
+
+    public function getAll(string $filter = null): array
+    {
+        return $this->model->all()->toArray();
+    }
+
+    public function findOne(string $id): stdClass|null
+    {
+        $advert = $this->model->find($id);
+
+        if(!$advert) {
+            return null;
+        }
+
+        return (object) $advert->toArray();
+    }
+
+    public function delete(string $id): void
+    {
+        $this->model->findOrFail($id)->delete();
+    }
+
+    public function new(CreateAdvertDTO $dto): stdClass
+    {
+        $advert = $this->model->create(
+            (array) $dto
+        );
+
+        return (object) $advert->toArray();
+    }
+
+    public function update(UpdateAdvertDTO $dto): stdClass|null
+    {
+        if(!$advert = $this->model->find($dto->id)){
+            return null;
+        }
+
+        $advert->update(
+            (array) $dto
+        );
+
+        return (object) $advert->toArray();
+    }
+
+}
