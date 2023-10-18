@@ -4,7 +4,7 @@ namespace App\Jobs;
 
 use App\Services\AdvertService;
 use App\Services\MeliService;
-use App\Services\TrackAdvertVistsService;
+use App\Services\TrackAdvertVisitsService;
 use Egulias\EmailValidator\Result\Reason\Reason;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
@@ -30,6 +30,6 @@ class TrackAdvertVisits implements ShouldQueue
      */
     public function handle(): void
     {
-        (new TrackAdvertVistsService($this->advertService, $this->meliService))->importAdvertsMeli();
+        (new TrackAdvertVisitsService($this->advertService, $this->meliService))->trackAdvertsVisitsMeli();
     }
 }

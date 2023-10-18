@@ -2,24 +2,35 @@
 
 namespace App\Repositories;
 
-use App\Services\MeliService;
+use Illuminate\Support\Facades\Http;
 
 class MeliRepository
 {
-    protected $meliService;
+    protected $baseUrl = 'https://api.mercadolibre.com/';
 
-    public function __construct(MeliService $meliService)
+    public function getItems(string $query = 'iphone 14', int $limit = 10)
     {
-        $this->meliService = $meliService;
-    }
+        $response = Http::withUrlParameters([
+            'baseurl'  => $this->baseUrl,
+            'siteId'   => 'sites/MLB',
+            'endPoint' => 'search'
+        ])->get("{+baseurl}/{siteId}/{endPoint}", [
+            'q'     => $query,
+            'limit' => $limit
+        ]);
 
-    public function getItems()
-    {
-        return $this->meliService->getItems();
+        return $response->json()['results'] ?? [];
     }
 
     public function getVisitsItems(string $itemId)
     {
-        return $this->meliService->getVisitsItems($itemId);
+        $response = Http::withUrlParameters([
+            'baseurl'  => $this->baseUrl,
+            'endPoint' => 'visits/items'
+        ])->get("{+baseurl}/{endPoint}", [
+            'ids' => $itemId
+        ]);
+
+        return $response->json();
     }
 }

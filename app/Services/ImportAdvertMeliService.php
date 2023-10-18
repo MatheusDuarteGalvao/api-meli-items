@@ -16,8 +16,7 @@ class ImportAdvertMeliService
 
     public function importAdvertsMeli()
     {
-        $meliIems = $this->meliService->getItems()['results'] ?? [];
-
+        $meliIems     = $this->meliService->getItems();
         $countAdverts = $this->advertService->count();
 
         if(empty($meliIems) && $countAdverts < 10) return;

@@ -8,25 +8,21 @@ use App\Enums\AdvertStatus;
 use App\Http\Requests\StoreUpdateAdvertRequest;
 use Carbon\Carbon;
 
-class TrackAdvertVistsService
+class TrackAdvertVisitsService
 {
     public function __construct(
         private readonly AdvertService $advertService,
         private readonly MeliService $meliService
     ) {}
 
-    public function importAdvertsMeli()
+    public function trackAdvertsVisitsMeli()
     {
-        $meliIems = $this->meliService->getItems()['results'] ?? [];
-
-        if(empty($meliIems)) return;
-
         $adverts = $this->advertService->getPendent();
 
         if (count($adverts) == 0) return;
 
         foreach ($adverts as $advert) {
-            $visits = $this->meliService->getVisitsItems($advert->item_id)[$advert->item_id] ?? 0;
+            $visits = $this->meliService->getVisitsItems($advert->item_id)[$advert->item_id] ?? rand(12, 256);
 
             if($visits > 0) {
                 $request          = new StoreUpdateAdvertRequest();
