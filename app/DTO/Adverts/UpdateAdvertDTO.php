@@ -9,7 +9,6 @@ class UpdateAdvertDTO
 {
     public function __construct(
         public string $id,
-        public string $title,
         public AdvertStatus $status,
         public string $updated,
         public string $visits
@@ -19,7 +18,6 @@ class UpdateAdvertDTO
     {
         return new self(
             $request->id ?? $id,
-            $request->title,
             $request->status,
             $request->updated,
             $request->visits

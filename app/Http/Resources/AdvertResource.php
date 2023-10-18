@@ -21,7 +21,7 @@ class AdvertResource extends JsonResource
             'title'   => $this->title,
             'status'  => AdvertStatus::fromValue($this->status),
             'visits'  => $this->visits,
-            'updated' =>  Carbon::make($this->created_at)->format('Y-m-d H:i:s')
+            'updated' => $this->updated ? Carbon::make($this->updated)->format('Y-m-d H:i:s') : null
         ];
     }
 }

@@ -21,7 +21,7 @@ class AdvertController extends Controller
     {
         $adverts = $this->service->getAll();
 
-        return new AdvertResource($adverts);
+        return AdvertResource::collection($adverts);
     }
 
     /**

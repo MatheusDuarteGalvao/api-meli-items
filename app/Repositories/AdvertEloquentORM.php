@@ -6,6 +6,7 @@ use App\DTO\Adverts\CreateAdvertDTO;
 use App\DTO\Adverts\UpdateAdvertDTO;
 use App\Models\Advert;
 use App\Repositories\AdvertRepositoryInterface;
+use Illuminate\Database\Eloquent\Collection;
 use stdClass;
 
 class AdvertEloquentORM implements AdvertRepositoryInterface
@@ -28,9 +29,14 @@ class AdvertEloquentORM implements AdvertRepositoryInterface
         return new PaginationPresenter($result);
     }
 
-    public function getAll(string $filter = null): array
+    public function getAll(string $filter = null): Collection
     {
-        return $this->model->all()->toArray();
+        return $this->model->all();
+    }
+
+    public function getPendent(): Collection
+    {
+        return $this->model->where('status', 'PENDENTE')->get();
     }
 
     public function count(): int

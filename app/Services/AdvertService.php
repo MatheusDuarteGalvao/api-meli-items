@@ -6,6 +6,7 @@ namespace App\Services;
 use App\DTO\Adverts\CreateAdvertDTO;
 use App\DTO\Adverts\UpdateAdvertDTO;
 use App\Repositories\AdvertRepositoryInterface;
+use Illuminate\Database\Eloquent\Collection;
 use stdClass;
 
 class AdvertService
@@ -14,9 +15,14 @@ class AdvertService
         protected AdvertRepositoryInterface $repository
     ) {}
 
-    public function getAll(string $filter = null): array
+    public function getAll(string $filter = null): Collection
     {
         return $this->repository->getAll($filter);
+    }
+
+    public function getPendent(): Collection
+    {
+        return $this->repository->getPendent();
     }
 
     public function count(): int
