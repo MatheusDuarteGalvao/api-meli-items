@@ -10,17 +10,23 @@ use Carbon\Carbon;
 class ImportAdvertMeliService
 {
     public function __construct(
-        protected AdvertService $advertService,
-        protected MeliService $meliService
+        private readonly AdvertService $advertService,
+        private readonly MeliService $meliService
     ) {}
 
     public function importAdvertsMeli()
     {
         $meliIems = $this->meliService->getItems()['results'] ?? [];
 
-        if(empty($meliIems)) return;
+        $countAdverts = $this->advertService->count();
+
+        if(empty($meliIems) && $countAdverts < 10) return;
 
         foreach ($meliIems as $meliIem) {
+            $advert = $this->advertService->getByItemId($meliIem['id']);
+
+            if($advert != null) continue;
+
             $request          = new StoreUpdateAdvertRequest();
             $request->title   = $meliIem['title'];
             $request->item_id = $meliIem['id'];

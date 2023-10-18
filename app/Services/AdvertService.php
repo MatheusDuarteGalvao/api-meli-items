@@ -5,6 +5,7 @@ namespace App\Services;
 
 use App\DTO\Adverts\CreateAdvertDTO;
 use App\DTO\Adverts\UpdateAdvertDTO;
+use App\Models\Advert;
 use App\Repositories\AdvertRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
 use stdClass;
@@ -23,6 +24,11 @@ class AdvertService
     public function getPendent(): Collection
     {
         return $this->repository->getPendent();
+    }
+
+    public function getByItemId(string $itemId): Advert|null
+    {
+        return $this->repository->getByItemId($itemId);
     }
 
     public function count(): int

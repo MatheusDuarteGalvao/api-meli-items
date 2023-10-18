@@ -39,6 +39,11 @@ class AdvertEloquentORM implements AdvertRepositoryInterface
         return $this->model->where('status', 'PENDENTE')->get();
     }
 
+    public function getByItemId(string $itemId): Advert|null
+    {
+        return $this->model->where('item_id', $itemId)->first();
+    }
+
     public function count(): int
     {
         return $this->model->count();

@@ -11,8 +11,8 @@ use Carbon\Carbon;
 class TrackAdvertVistsService
 {
     public function __construct(
-        protected AdvertService $advertService,
-        protected MeliService $meliService
+        private readonly AdvertService $advertService,
+        private readonly MeliService $meliService
     ) {}
 
     public function importAdvertsMeli()
@@ -23,8 +23,10 @@ class TrackAdvertVistsService
 
         $adverts = $this->advertService->getPendent();
 
+        if (count($adverts) == 0) return;
+
         foreach ($adverts as $advert) {
-            $visits = $this->meliService->getVisitsItems($advert->item_id)[$advert->item_id] ?? 240;
+            $visits = $this->meliService->getVisitsItems($advert->item_id)[$advert->item_id] ?? 0;
 
             if($visits > 0) {
                 $request          = new StoreUpdateAdvertRequest();
