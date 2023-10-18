@@ -9,18 +9,20 @@ class UpdateAdvertDTO
 {
     public function __construct(
         public string $id,
-        public string $subject,
+        public string $title,
         public AdvertStatus $status,
-        public string $body
+        public string $updated,
+        public string $visits
     ) {}
 
     public static function makeFromRequest(StoreUpdateAdvertRequest $request, string $id = null): self
     {
         return new self(
             $request->id ?? $id,
-            $request->subject,
-            AdvertStatus::A,
-            $request->body
+            $request->title,
+            $request->status,
+            $request->updated,
+            $request->visits
         );
     }
 

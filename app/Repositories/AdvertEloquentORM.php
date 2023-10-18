@@ -33,6 +33,11 @@ class AdvertEloquentORM implements AdvertRepositoryInterface
         return $this->model->all()->toArray();
     }
 
+    public function count(): int
+    {
+        return $this->model->count();
+    }
+
     public function findOne(string $id): stdClass|null
     {
         $advert = $this->model->find($id);

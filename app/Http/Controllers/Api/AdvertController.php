@@ -3,24 +3,25 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Resources\AdvertResource;
+use App\Services\AdvertService;
+use Illuminate\Http\Response;
 
 class AdvertController extends Controller
 {
+
+    public function __construct(
+        protected AdvertService $service,
+    ) {}
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
-    }
+        $adverts = $this->service->getAll();
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+        return new AdvertResource($adverts);
     }
 
     /**
@@ -28,22 +29,13 @@ class AdvertController extends Controller
      */
     public function show(string $id)
     {
-        //
+        if(!$avdert = $this->service->findOne($id)) {
+            return response()->json([
+                'error' => 'Not found'
+            ], Response::HTTP_NOT_FOUND);
+        }
+
+        return new AdvertResource($avdert);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }

@@ -19,6 +19,11 @@ class AdvertService
         return $this->repository->getAll($filter);
     }
 
+    public function count(): int
+    {
+        return $this->repository->count();
+    }
+
     public function findOne(string $id): stdClass|null
     {
         return $this->repository->findOne($id);

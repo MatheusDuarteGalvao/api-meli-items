@@ -10,7 +10,7 @@ class CreateAdvertDTO
     public function __construct(
         public string $title,
         public AdvertStatus $status,
-        public string $itemId,
+        public string $item_id,
     ) {
     }
 
@@ -19,7 +19,7 @@ class CreateAdvertDTO
         return new self(
             $request->title,
             AdvertStatus::PENDENTE,
-            $request->itemId
+            $request->item_id
         );
     }
 
