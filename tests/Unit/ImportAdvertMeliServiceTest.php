@@ -2,7 +2,6 @@
 
 namespace Tests\Unit;
 
-use App\Models\Advert;
 use App\Services\Contracts\AdvertServiceContract;
 use App\Services\Contracts\MeliServiceContract;
 use App\Services\ImportAdvertMeliService;
@@ -15,8 +14,8 @@ class ImportAdvertMeliServiceTest extends TestCase
         $data = [
             [
                 'id' => rand(1000, 10000),
-                'title' => 'Item 1'
-            ]
+                'title' => 'Item 1',
+            ],
         ];
 
         $this->mockService($data);

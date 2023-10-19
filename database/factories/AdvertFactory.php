@@ -18,11 +18,11 @@ class AdvertFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' =>  fake()->word(),
-            'item_id' => "MLB" . rand(3231707549, 3931707549),
-            'status'  => AdvertStatus::PENDING,
+            'title' => fake()->word(),
+            'item_id' => 'MLB'.rand(3231707549, 3931707549),
+            'status' => AdvertStatus::PENDING,
             'updated' => now(),
-            'visits'  => 0
+            'visits' => 0,
         ];
     }
 }

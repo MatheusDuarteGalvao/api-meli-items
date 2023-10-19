@@ -2,12 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Enums\AdvertStatus;
-use App\Jobs\TrackAdvertVisits;
 use App\Models\Advert;
-use App\Services\AdvertService;
 use App\Services\Contracts\MeliServiceContract;
-use App\Services\MeliService;
 use App\Services\TrackAdvertVisitsService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -23,7 +19,7 @@ class TrackAdvertVisitsServiceTest extends TestCase
         $visits = rand(1, 1052);
 
         $data = [
-            $advert->item_id => $visits
+            $advert->item_id => $visits,
         ];
 
         $this->mockService($data, $advert->item_id);
@@ -35,7 +31,7 @@ class TrackAdvertVisitsServiceTest extends TestCase
         $this->assertDatabaseHas('adverts', [
             'id' => $advert->id,
             'visits' => $visits,
-            'status' => 'PROCESSED'
+            'status' => 'PROCESSED',
         ]);
     }
 

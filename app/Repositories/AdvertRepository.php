@@ -39,7 +39,7 @@ class AdvertRepository
     {
         $advert = $this->model->find($id);
 
-        if (!$advert) {
+        if (! $advert) {
             return null;
         }
 
@@ -62,7 +62,7 @@ class AdvertRepository
 
     public function update(UpdateAdvertDTO $dto): ?stdClass
     {
-        if (!$advert = $this->model->find($dto->id)) {
+        if (! $advert = $this->model->find($dto->id)) {
             return null;
         }
 
