@@ -22,20 +22,20 @@ class StoreUpdateAdvertRequest extends FormRequest
      */
     public function rules(): array
     {
-            $rules = [
-                'item_id' => [
-                    'unique:adverts',
-                    'max:255'
-                ],
-                'title' => 'max:255'
-            ];
+        $rules = [
+            'item_id' => [
+                'unique:adverts',
+                'max:255',
+            ],
+            'title' => 'max:255',
+        ];
 
-            if ($this->method() === 'PUT' || $this->method() === 'PATCH') {
-                $rules['item_id'] = [
-                    'required',
-                    Rule::unique('adverts')->ignore($this->advert ?? $this->id)
-                ];
-            }
+        if ($this->method() === 'PUT' || $this->method() === 'PATCH') {
+            $rules['item_id'] = [
+                'required',
+                Rule::unique('adverts')->ignore($this->advert ?? $this->id),
+            ];
+        }
 
         return $rules;
     }

@@ -21,7 +21,7 @@ class AuthController extends Controller
         $token = $this->authService->authenticateUser($request);
 
         return response()->json([
-            'token' => $token
+            'token' => $token,
         ]);
     }
 
@@ -30,7 +30,7 @@ class AuthController extends Controller
         $this->authService->logout($request);
 
         return response()->json([
-            'message' => 'success'
+            'message' => 'success',
         ]);
     }
 
@@ -42,5 +42,4 @@ class AuthController extends Controller
             'me' => $user,
         ]);
     }
-
 }

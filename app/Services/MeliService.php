@@ -9,7 +9,8 @@ class MeliService implements MeliServiceContract
 {
     public function __construct(
         private readonly MeliRepository $meliRepository
-    ) {}
+    ) {
+    }
 
     public function getItems($query = 'iphone 14', $limit = 10)
     {

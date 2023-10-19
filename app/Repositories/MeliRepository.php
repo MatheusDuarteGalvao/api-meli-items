@@ -11,12 +11,12 @@ class MeliRepository
     public function getItems(string $query = 'iphone 14', int $limit = 10)
     {
         $response = Http::withUrlParameters([
-            'baseurl'  => $this->baseUrl,
-            'siteId'   => 'sites/MLB',
-            'endPoint' => 'search'
-        ])->get("{+baseurl}/{siteId}/{endPoint}", [
-            'q'     => $query,
-            'limit' => $limit
+            'baseurl' => $this->baseUrl,
+            'siteId' => 'sites/MLB',
+            'endPoint' => 'search',
+        ])->get('{+baseurl}/{siteId}/{endPoint}', [
+            'q' => $query,
+            'limit' => $limit,
         ]);
 
         return $response->json()['results'] ?? [];
@@ -25,10 +25,10 @@ class MeliRepository
     public function getVisitsItems(string $itemId)
     {
         $response = Http::withUrlParameters([
-            'baseurl'  => $this->baseUrl,
-            'endPoint' => 'visits/items'
-        ])->get("{+baseurl}/{endPoint}", [
-            'ids' => $itemId
+            'baseurl' => $this->baseUrl,
+            'endPoint' => 'visits/items',
+        ])->get('{+baseurl}/{endPoint}', [
+            'ids' => $itemId,
         ]);
 
         return $response->json();

@@ -5,7 +5,6 @@ namespace App\Repositories;
 use App\DTO\Adverts\CreateAdvertDTO;
 use App\DTO\Adverts\UpdateAdvertDTO;
 use App\Models\Advert;
-use App\Repositories\AdvertRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
 use stdClass;
 
@@ -13,7 +12,8 @@ class AdvertEloquentORM implements AdvertRepositoryInterface
 {
     public function __construct(
         protected Advert $model
-    ) {}
+    ) {
+    }
 
     public function getAll(string $filter = null): Collection
     {
@@ -25,7 +25,7 @@ class AdvertEloquentORM implements AdvertRepositoryInterface
         return $this->model->where('status', 'PENDING')->get();
     }
 
-    public function getByItemId(string $itemId): Advert|null
+    public function getByItemId(string $itemId): ?Advert
     {
         return $this->model->where('item_id', $itemId)->first();
     }
@@ -35,11 +35,11 @@ class AdvertEloquentORM implements AdvertRepositoryInterface
         return $this->model->count();
     }
 
-    public function findOne(string $id): stdClass|null
+    public function findOne(string $id): ?stdClass
     {
         $advert = $this->model->find($id);
 
-        if(!$advert) {
+        if (! $advert) {
             return null;
         }
 
@@ -60,9 +60,9 @@ class AdvertEloquentORM implements AdvertRepositoryInterface
         return (object) $advert->toArray();
     }
 
-    public function update(UpdateAdvertDTO $dto): stdClass|null
+    public function update(UpdateAdvertDTO $dto): ?stdClass
     {
-        if(!$advert = $this->model->find($dto->id)){
+        if (! $advert = $this->model->find($dto->id)) {
             return null;
         }
 
@@ -72,5 +72,4 @@ class AdvertEloquentORM implements AdvertRepositoryInterface
 
         return (object) $advert->toArray();
     }
-
 }

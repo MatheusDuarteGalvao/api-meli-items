@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Services;
 
 use App\DTO\Adverts\CreateAdvertDTO;
@@ -15,7 +14,8 @@ class AdvertService implements AdvertServiceContract
 {
     public function __construct(
         private readonly AdvertRepositoryInterface $repository
-    ) {}
+    ) {
+    }
 
     public function getAll(string $filter = null): Collection
     {
@@ -27,7 +27,7 @@ class AdvertService implements AdvertServiceContract
         return $this->repository->getPendent();
     }
 
-    public function getByItemId(string $itemId): Advert|null
+    public function getByItemId(string $itemId): ?Advert
     {
         return $this->repository->getByItemId($itemId);
     }
@@ -37,7 +37,7 @@ class AdvertService implements AdvertServiceContract
         return $this->repository->count();
     }
 
-    public function findOne(string $id): stdClass|null
+    public function findOne(string $id): ?stdClass
     {
         return $this->repository->findOne($id);
     }
@@ -47,7 +47,7 @@ class AdvertService implements AdvertServiceContract
         return $this->repository->new($dto);
     }
 
-    public function update(UpdateAdvertDTO $dto): stdClass|null
+    public function update(UpdateAdvertDTO $dto): ?stdClass
     {
         return $this->repository->update($dto);
     }

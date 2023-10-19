@@ -9,10 +9,10 @@ use Illuminate\Http\Response;
 
 class AdvertController extends Controller
 {
-
     public function __construct(
         protected AdvertService $service,
-    ) {}
+    ) {
+    }
 
     /**
      * Display a listing of the resource.
@@ -29,13 +29,12 @@ class AdvertController extends Controller
      */
     public function show(string $id)
     {
-        if(!$avdert = $this->service->findOne($id)) {
+        if (! $avdert = $this->service->findOne($id)) {
             return response()->json([
-                'error' => 'Not found'
+                'error' => 'Not found',
             ], Response::HTTP_NOT_FOUND);
         }
 
         return new AdvertResource($avdert);
     }
-
 }

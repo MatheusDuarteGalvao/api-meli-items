@@ -11,16 +11,16 @@ use Illuminate\Validation\ValidationException;
 
 class AuthService
 {
-
     public function __construct(
-        private readonly  AuthRepository $authRepository
-    ) {}
+        private readonly AuthRepository $authRepository
+    ) {
+    }
 
     public function authenticateUser(AuthRequest $request)
     {
         $user = $this->authRepository->getUserByEmail($request->email);
 
-        if (!$user || !Hash::check($request->password, $user->password)) {
+        if (! $user || ! Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
                 'email' => ['The provided credentials are incorrect'],
             ]);

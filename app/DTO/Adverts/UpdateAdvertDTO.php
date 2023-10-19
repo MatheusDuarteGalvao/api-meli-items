@@ -12,7 +12,8 @@ class UpdateAdvertDTO
         public AdvertStatus $status,
         public string $updated,
         public string $visits
-    ) {}
+    ) {
+    }
 
     public static function makeFromRequest(StoreUpdateAdvertRequest $request, string $id = null): self
     {
@@ -23,5 +24,4 @@ class UpdateAdvertDTO
             $request->visits
         );
     }
-
 }

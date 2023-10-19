@@ -2,10 +2,8 @@
 
 namespace App\Providers;
 
-use App\Repositories\{
-    AdvertEloquentORM,
-    AdvertRepositoryInterface
-};
+use App\Repositories\AdvertEloquentORM;
+use App\Repositories\AdvertRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider

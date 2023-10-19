@@ -16,7 +16,7 @@ class Advert extends Model
         'item_id',
         'status',
         'updated',
-        'visits'
+        'visits',
     ];
 
     public function status(): Attribute

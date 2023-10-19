@@ -1,17 +1,16 @@
 <?php
 
-
 namespace App\Enums;
 
 enum AdvertStatus: string
 {
-    case PENDING   = "Em processamento”";
-    case PROCESSED = "Processado";
+    case PENDING = 'Em processamento”';
+    case PROCESSED = 'Processado';
 
     public static function fromValue(string $name): string
     {
         foreach (self::cases() as $status) {
-            if($name === $status->name) {
+            if ($name === $status->name) {
                 return $status->value;
             }
         }

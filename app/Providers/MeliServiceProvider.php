@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Services\MeliService;
 use App\Services\Contracts\MeliServiceContract;
+use App\Services\MeliService;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 
