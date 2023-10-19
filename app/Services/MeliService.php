@@ -3,8 +3,9 @@
 namespace App\Services;
 
 use App\Repositories\MeliRepository;
+use App\Services\Contracts\MeliServiceContract;
 
-class MeliService
+class MeliService implements MeliServiceContract
 {
     public function __construct(
         private readonly MeliRepository $meliRepository

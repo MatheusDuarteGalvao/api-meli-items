@@ -20,16 +20,13 @@ class TrackAdvertVisits implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct(
-        private readonly AdvertService $advertService,
-        private readonly MeliService $meliService
-    ) {}
+    public function __construct() {}
 
     /**
      * Execute the job.
      */
-    public function handle(): void
+    public function handle(TrackAdvertVisitsService $trackAdvertVisitsService): void
     {
-        (new TrackAdvertVisitsService($this->advertService, $this->meliService))->trackAdvertsVisitsMeli();
+        $trackAdvertVisitsService->trackAdvertsVisitsMeli();
     }
 }

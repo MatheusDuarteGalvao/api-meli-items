@@ -7,13 +7,14 @@ use App\DTO\Adverts\CreateAdvertDTO;
 use App\DTO\Adverts\UpdateAdvertDTO;
 use App\Models\Advert;
 use App\Repositories\AdvertRepositoryInterface;
+use App\Services\Contracts\AdvertServiceContract;
 use Illuminate\Database\Eloquent\Collection;
 use stdClass;
 
-class AdvertService
+class AdvertService implements AdvertServiceContract
 {
     public function __construct(
-        protected AdvertRepositoryInterface $repository
+        private readonly AdvertRepositoryInterface $repository
     ) {}
 
     public function getAll(string $filter = null): Collection

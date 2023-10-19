@@ -18,16 +18,13 @@ class ImportAdvertsFromMeli implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct(
-        protected AdvertService $advertService,
-        protected MeliService $meliService
-    ) {}
+    public function __construct() {}
 
     /**
      * Execute the job.
      */
-    public function handle(): void
+    public function handle(ImportAdvertMeliService $importAdvertMeliService): void
     {
-        (new ImportAdvertMeliService($this->advertService, $this->meliService))->importAdvertsMeli();
+        $importAdvertMeliService->importAdvertsMeli();
     }
 }
