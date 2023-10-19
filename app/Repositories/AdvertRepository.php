@@ -8,14 +8,14 @@ use App\Models\Advert;
 use Illuminate\Database\Eloquent\Collection;
 use stdClass;
 
-class AdvertEloquentORM implements AdvertRepositoryInterface
+class AdvertRepository
 {
     public function __construct(
-        protected Advert $model
+        private readonly Advert $model
     ) {
     }
 
-    public function getAll(string $filter = null): Collection
+    public function getAll(): Collection
     {
         return $this->model->all();
     }
@@ -39,7 +39,7 @@ class AdvertEloquentORM implements AdvertRepositoryInterface
     {
         $advert = $this->model->find($id);
 
-        if (! $advert) {
+        if (!$advert) {
             return null;
         }
 
@@ -62,7 +62,7 @@ class AdvertEloquentORM implements AdvertRepositoryInterface
 
     public function update(UpdateAdvertDTO $dto): ?stdClass
     {
-        if (! $advert = $this->model->find($dto->id)) {
+        if (!$advert = $this->model->find($dto->id)) {
             return null;
         }
 

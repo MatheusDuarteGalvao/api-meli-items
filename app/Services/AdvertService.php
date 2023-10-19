@@ -5,7 +5,7 @@ namespace App\Services;
 use App\DTO\Adverts\CreateAdvertDTO;
 use App\DTO\Adverts\UpdateAdvertDTO;
 use App\Models\Advert;
-use App\Repositories\AdvertRepositoryInterface;
+use App\Repositories\AdvertRepository;
 use App\Services\Contracts\AdvertServiceContract;
 use Illuminate\Database\Eloquent\Collection;
 use stdClass;
@@ -13,7 +13,7 @@ use stdClass;
 class AdvertService implements AdvertServiceContract
 {
     public function __construct(
-        private readonly AdvertRepositoryInterface $repository
+        private readonly AdvertRepository $repository
     ) {
     }
 
