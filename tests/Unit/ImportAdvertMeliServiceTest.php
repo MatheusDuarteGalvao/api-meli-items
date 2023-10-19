@@ -42,7 +42,7 @@ class ImportAdvertMeliServiceTest extends TestCase
                 $mock->shouldReceive('count')
                     ->andReturn(10);
                 $mock->shouldReceive('getByItemId')
-                    ->andReturn(Advert::factory()->make());
+                    ->once();
                 $mock->shouldReceive('new')
                     ->once();
             }

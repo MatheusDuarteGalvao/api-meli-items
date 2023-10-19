@@ -28,7 +28,7 @@ class ImportAdvertMeliService
         foreach ($meliIems as $meliIem) {
             $advert = $this->advertService->getByItemId($meliIem['id']);
 
-            if (empty($advert)) {
+            if (!empty($advert)) {
                 continue;
             }
 

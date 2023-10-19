@@ -19,6 +19,6 @@ class MeliService implements MeliServiceContract
 
     public function getVisitsItems(string $itemId)
     {
-        return $this->meliRepository->getVisitsItems($itemId);
+        return $this->meliRepository->getVisitsItems($itemId)['results'] ?? [];
     }
 }
