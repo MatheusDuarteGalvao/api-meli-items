@@ -22,7 +22,7 @@ class AdvertEloquentORM implements AdvertRepositoryInterface
 
     public function getPendent(): Collection
     {
-        return $this->model->where('status', 'PENDENTE')->get();
+        return $this->model->where('status', 'PENDING')->get();
     }
 
     public function getByItemId(string $itemId): Advert|null

@@ -19,7 +19,7 @@ class CreateAdvertDTO
     {
         return new self(
             $request->title,
-            AdvertStatus::PENDENTE,
+            AdvertStatus::PENDING,
             $request->item_id,
             $request->updated
         );

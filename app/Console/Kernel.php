@@ -14,7 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->job(ImportAdvertsFromMeli::class)->everyMinute();
+        $schedule->job(ImportAdvertsFromMeli::class)->everyTenMinutes();
         $schedule->job(TrackAdvertVisits::class)->everyMinute();
     }
 

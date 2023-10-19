@@ -22,11 +22,11 @@ class TrackAdvertVisitsService
         if (count($adverts) == 0) return;
 
         foreach ($adverts as $advert) {
-            $visits = $this->meliService->getVisitsItems($advert->item_id)[$advert->item_id] ?? rand(12, 256);
+            $visits = $this->meliService->getVisitsItems($advert->item_id)[$advert->item_id] ?? 0;
 
             if($visits > 0) {
                 $request          = new StoreUpdateAdvertRequest();
-                $request->status  = AdvertStatus::PROCESSADO;
+                $request->status  = AdvertStatus::PROCESSED;
                 $request->updated = Carbon::now()->format('Y-m-d H:i:s');
                 $request->visits  = $visits;
 

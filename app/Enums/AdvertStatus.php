@@ -5,8 +5,8 @@ namespace App\Enums;
 
 enum AdvertStatus: string
 {
-    case PENDENTE   = "Em processamento”";
-    case PROCESSADO = "Processado";
+    case PENDING   = "Em processamento”";
+    case PROCESSED = "Processado";
 
     public static function fromValue(string $name): string
     {
