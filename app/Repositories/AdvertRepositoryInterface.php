@@ -12,7 +12,6 @@ use stdClass;
 
 interface AdvertRepositoryInterface
 {
-    public function paginate(int $page = 1, int $totalPerPage = 15, string $filter = null): PaginationInterface;
     public function getAll(string $filter = null): Collection;
     public function getPendent(): Collection;
     public function getbyItemId(string $itemId): Advert|null;
