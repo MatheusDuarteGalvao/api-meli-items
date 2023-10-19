@@ -5,13 +5,15 @@ namespace App\Services;
 use App\DTO\Adverts\UpdateAdvertDTO;
 use App\Enums\AdvertStatus;
 use App\Http\Requests\StoreUpdateAdvertRequest;
+use App\Services\Contracts\AdvertServiceContract;
+use App\Services\Contracts\MeliServiceContract;
 use Carbon\Carbon;
 
 class TrackAdvertVisitsService
 {
     public function __construct(
-        private readonly AdvertService $advertService,
-        private readonly MeliService $meliService
+        private readonly AdvertServiceContract $advertService,
+        private readonly MeliServiceContract $meliService
     ) {
     }
 
@@ -19,7 +21,7 @@ class TrackAdvertVisitsService
     {
         $adverts = $this->advertService->getPendent();
 
-        if (count($adverts) == 0) {
+        if ($adverts->isEmpty()) {
             return;
         }
 
