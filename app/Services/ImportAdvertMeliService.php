@@ -4,13 +4,15 @@ namespace App\Services;
 
 use App\DTO\Adverts\CreateAdvertDTO;
 use App\Http\Requests\StoreUpdateAdvertRequest;
+use App\Services\Contracts\AdvertServiceContract;
+use App\Services\Contracts\MeliServiceContract;
 use Carbon\Carbon;
 
 class ImportAdvertMeliService
 {
     public function __construct(
-        private readonly AdvertService $advertService,
-        private readonly MeliService $meliService
+        private readonly AdvertServiceContract $advertService,
+        private readonly MeliServiceContract $meliService
     ) {
     }
 
@@ -26,7 +28,7 @@ class ImportAdvertMeliService
         foreach ($meliIems as $meliIem) {
             $advert = $this->advertService->getByItemId($meliIem['id']);
 
-            if ($advert != null) {
+            if (empty($advert)) {
                 continue;
             }
 
